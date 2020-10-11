@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  votingApp:
+    container_name: "votingApp"
+    image: "jboss/wildfly"
+    environment:
+      - WILDFLY_USER=wildflyadmin
+      - WILDFLY_PASS=72MGhh8HD3QQb
+      - DB_NAME=online_voting_system
+      - DB_USER=root
+      - DB_PASS=supersecret
+      - DB_URI=db:3306
+    depends_on:
+      - votingDb
+    ports:
+      - "8080:8080" # application
+      - "8787:8787" # debug
+      - "9990:9990" # admin console
+    expose:
+      - "8787"
+    build: docker/wildfly
+
+  votingDb:
+    container_name: "votingDb"
+    image: "mysql"
+    environment:
+      - MYSQL_DATABASE=online_voting_system
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=supersecret
+    volumes:
+      - mysql-init:/docker-entrypoint-initdb.d/ # init database
+      - mysql-data:/var/lib/mysql/              # data storage
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql-data:
+  mysql-init:
+
+networks:
+  default:
+    driver: bridge
