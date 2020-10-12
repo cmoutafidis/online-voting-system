@@ -13,14 +13,14 @@ public class UserService {
     @PersistenceContext(unitName = "online_voting_systemDS")
     EntityManager entityManager;
 
-    public User createUser(final User todo) {
-        this.entityManager.persist(todo);
-        return todo;
+    public User createUser(final User user) {
+        this.entityManager.persist(user);
+        return user;
     }
 
-    public User updateUser(final User todo) {
-        this.entityManager.merge(todo);
-        return todo;
+    public User updateUser(final User user) {
+        this.entityManager.merge(user);
+        return user;
     }
 
     public User findUserById(final long id) {

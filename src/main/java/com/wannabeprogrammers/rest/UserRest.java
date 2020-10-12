@@ -19,30 +19,30 @@ public class UserRest {
 
     @Path("new")
     @POST
-    public Response createTodo(final User todo) {
-        this.userService.createUser(todo);
+    public Response createUser(final User user) {
+        this.userService.createUser(user);
 
-        return Response.ok(todo).build();
+        return Response.ok(user).build();
     }
 
 
     @Path("update")
     @POST
-    public Response updateTodo(final User todo) {
-        this.userService.updateUser(todo);
+    public Response updateUser(final User user) {
+        this.userService.updateUser(user);
 
-        return Response.ok(todo).build();
+        return Response.ok(user).build();
     }
 
     @Path("{id}")
     @GET
-    public User getTodo(@PathParam("id") final long id) {
+    public User getUser(@PathParam("id") final long id) {
         return this.userService.findUserById(id);
     }
 
     @Path("list")
     @GET
-    public List<User> getTodos() {
+    public List<User> getUsers() {
         return this.userService.getUsers();
     }
 
